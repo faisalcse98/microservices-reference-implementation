@@ -10,9 +10,25 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: CopyPublishBuildArtifacts@1
+  inputs:
+    Contents: 'this'
+    ArtifactName: 'that'
+    ArtifactType: 'Container'
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'Visual Studio Ultimate with MSDN(1)(a3a0a573-d739-4f89-bab7-b63ff12785b3)'
+    subscriptionId: 'a3a0a573-d739-4f89-bab7-b63ff12785b3'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'website'
+    location: 'East US'
+    templateLocation: 'Linked artifact'
+    csmFile: 'azuredeploy.json'
+    deploymentMode: 'Incremental'
+container:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
