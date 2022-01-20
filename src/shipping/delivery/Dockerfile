@@ -10,7 +10,7 @@ COPY Fabrikam.DroneDelivery.DeliveryService/*.csproj ./Fabrikam.DroneDelivery.De
 COPY NuGet.config .
 ARG USERNAME=fafaisal@microsoft.com
 ARG PAT=wejh6zv6bvfv7us7de6qq5a5df6ykvqkdugrdnvydcf5l7vh7kiq
-RUN sed -i "s|</configuration>|<packageSourceCredentials><Torch><add key=\"Username\" value=\"${USERNAME}\" /><add key=\"Password\" value=\"${PAT}\" /></Torch></packageSourceCredentials></configuration>|" NuGet.config
+RUN sed -i "s|</configuration>|<packageSourceCredentials><Torch><add key=\"Username\" value=\"${USERNAME}\" /><add key=\"ClearTextPassword\" value=\"${PAT}\" /></Torch></packageSourceCredentials></configuration>|" NuGet.config
 
 WORKDIR /app
 RUN dotnet restore /app/Fabrikam.DroneDelivery.Common/
