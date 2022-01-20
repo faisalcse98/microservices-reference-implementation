@@ -7,6 +7,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 COPY Fabrikam.DroneDelivery.Common/*.csproj ./Fabrikam.DroneDelivery.Common/
 COPY Fabrikam.DroneDelivery.DeliveryService/*.csproj ./Fabrikam.DroneDelivery.DeliveryService/
+COPY NuGet.config .
 WORKDIR /app
 RUN dotnet restore /app/Fabrikam.DroneDelivery.Common/
 RUN dotnet restore /app/Fabrikam.DroneDelivery.DeliveryService/
