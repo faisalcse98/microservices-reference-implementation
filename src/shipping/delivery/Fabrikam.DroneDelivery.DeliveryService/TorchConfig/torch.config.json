@@ -1,0 +1,113 @@
+﻿{
+  "Instrumentation": {
+    "Instrumenters": [
+      "TorchPointInstrumenter"
+    ],
+    "StrongNameSigningPolicy": "KeepSignature",
+    "Parallelism": 1,
+    "Assemblies": {
+      "Include": [
+        {
+          "Path": {
+            "Wildcard": [
+              "Fabrikam.DroneDelivery.DeliveryService.dll"
+            ]
+          }
+        }
+      ]
+    },
+    "Verification": {
+      "Enable": true,
+      "PEVerifyDirectory": "%peverifypath%",
+      "SucceedIfPEVerifyNotFound": true,
+      "MetadataOnly": true,
+      "Comparer": false,
+      "IgnoreReferenceErrors": false,
+      "PreVerifyAssemblies": true,
+      "PostVerifyAssemblies": true
+    }
+  },
+  "Instrumenters": [
+    {
+      "Name": "TorchPointInstrumenter",
+      "ServiceFabricInterleavingTorchPoints": false,
+      "ExternalAsyncInterleavingTorchPoints": false,
+      "TorchPointsInlining": false
+    }
+  ],
+  "Dispatcher": {
+    "Active": "never",
+    "Interceptors": [
+      "FaultInjection"
+    ]
+  },
+  "Interceptors": [
+    {
+      "Name": "FaultInjection",
+      "Active": "never",
+      "FaultLogPath": "fault-log.torchlog",
+      "Methods": {
+        "Include": [
+          {
+            "Method": {
+              "Wildcard": "StackExchange.Redis.IDatabaseAsync.StringSetAsync(*)"
+            },
+            "Rule": {
+              "Conditions": [
+                {
+                  "Type": "OnEveryCall"
+                }
+              ],
+              "Faults": [
+                {
+                  "Type": "AddLatencyFault",
+                  "Args": { "Latency": "5s" }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "Logging": {
+    "Using": [
+      "Microsoft.Torch"
+    ],
+    "MinimumLevel": "Information",
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": {
+          "path": "torch-debug.torchlog"
+        }
+      }
+    ],
+    "Enrich": [
+      "FromLogContext",
+      "WithMachineName",
+      "WithProcessId",
+      "WithThreadId"
+    ],
+    "Destructure": [
+      {
+        "Name": "ToMaximumDepth",
+        "Args": {
+          "maximumDestructuringDepth": 4
+        }
+      },
+      {
+        "Name": "ToMaximumStringLength",
+        "Args": {
+          "maximumStringLength": 100
+        }
+      },
+      {
+        "Name": "ToMaximumCollectionCount",
+        "Args": {
+          "maximumCollectionCount": 10
+        }
+      }
+    ]
+  }
+}
