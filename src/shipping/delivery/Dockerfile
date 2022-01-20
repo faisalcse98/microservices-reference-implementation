@@ -8,6 +8,9 @@ WORKDIR /app
 COPY Fabrikam.DroneDelivery.Common/*.csproj ./Fabrikam.DroneDelivery.Common/
 COPY Fabrikam.DroneDelivery.DeliveryService/*.csproj ./Fabrikam.DroneDelivery.DeliveryService/
 COPY NuGet.config .
+ARG PAT=wejh6zv6bvfv7us7de6qq5a5df6ykvqkdugrdnvydcf5l7vh7kiq
+RUN sed -i "s|</configuration>|<packageSourceCredentials><Torch><add key=\"Username\" value=\"PAT\" /><add key=\"ClearTextPassword\" value=\"${PAT}\" /></Torch></packageSourceCredentials></configuration>|" nuget.config
+
 WORKDIR /app
 RUN dotnet restore /app/Fabrikam.DroneDelivery.Common/
 RUN dotnet restore /app/Fabrikam.DroneDelivery.DeliveryService/
