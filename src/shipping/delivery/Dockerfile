@@ -15,12 +15,12 @@ ARG pat
 # RUN sed -i "s|</configuration>|<packageSourceCredentials><Torch><add key=\"Username\" value=\"${username}\" /><add key=\"ClearTextPassword\" value=\"${pat}\" /><add key=\"ValidAuthenticationTypes\" value=\"basic\" /></Torch></packageSourceCredentials></configuration>|" NuGet.config
 
 WORKDIR /app
-RUN dotnet restore /app/Fabrikam.DroneDelivery.Common/
-RUN dotnet restore /app/Fabrikam.DroneDelivery.DeliveryService/
-
-WORKDIR /app
 COPY Fabrikam.DroneDelivery.Common/. ./Fabrikam.DroneDelivery.Common/
 COPY Fabrikam.DroneDelivery.DeliveryService/. ./Fabrikam.DroneDelivery.DeliveryService/
+
+WORKDIR /app
+RUN dotnet restore /app/Fabrikam.DroneDelivery.Common/
+RUN dotnet restore /app/Fabrikam.DroneDelivery.DeliveryService/
 
 FROM build AS testrunner
 
