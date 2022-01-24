@@ -9,7 +9,7 @@ WORKDIR /app
 COPY Fabrikam.DroneDelivery.Common/*.csproj ./Fabrikam.DroneDelivery.Common/
 COPY Fabrikam.DroneDelivery.DeliveryService/*.csproj ./Fabrikam.DroneDelivery.DeliveryService/
 COPY NuGet.config .
-COPY Fabrikam.DroneDelivery.DeliveryService/TorchPkg ./TorchPkg/
+COPY Fabrikam.DroneDelivery.DeliveryService/TorchPkg/. ./TorchPkg/
 ARG username
 ARG pat
 # RUN sed -i "s|</configuration>|<packageSourceCredentials><Torch><add key=\"Username\" value=\"${username}\" /><add key=\"ClearTextPassword\" value=\"${pat}\" /><add key=\"ValidAuthenticationTypes\" value=\"basic\" /></Torch></packageSourceCredentials></configuration>|" NuGet.config
