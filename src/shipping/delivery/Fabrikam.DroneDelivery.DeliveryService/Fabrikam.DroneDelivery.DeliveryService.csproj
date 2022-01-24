@@ -39,7 +39,7 @@
     <Exec Command="dotnet new tool-manifest --force" />
   </Target>
   <Target Name="TorchPostPublish2" AfterTargets="Publish">
-    <Exec Command="dotnet tool install torch.tool --version 0.13.6-g4950e6a6d6" />
+    <Exec Command="dotnet tool install torch.tool" />
   </Target>
   <Target Name="TorchPostPublish3" AfterTargets="Publish">
     <Exec Command="dotnet torch instrument --input $(PublishDir) --tc $(ProjectDir)TorchConfig\torch.config.json" />
