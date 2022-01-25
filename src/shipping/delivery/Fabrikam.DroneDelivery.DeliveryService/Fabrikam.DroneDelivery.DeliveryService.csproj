@@ -37,13 +37,13 @@
     <SuppressTorchInstrumentation>True</SuppressTorchInstrumentation>
   </PropertyGroup>
   <Target Name="TorchPostPublish1" AfterTargets="Publish">
-    <Exec Command="REM dotnet new tool-manifest --force" />
+    <Exec Command="# dotnet new tool-manifest --force" />
   </Target>
   <Target Name="TorchPostPublish2" AfterTargets="Publish">
-    <Exec Command="REM dotnet tool install torch.tool --version 0.13.6-g7ae3fff08d" />
+    <Exec Command="# dotnet tool install torch.tool --version 0.13.6-g7ae3fff08d" />
   </Target>
   <Target Name="TorchPostPublish3" AfterTargets="Publish">
-    <Exec Command="REM dotnet torch instrument --input $(PublishDir) --tc $(ProjectDir)TorchConfig\torch.config.json" />
+    <Exec Command="# dotnet torch instrument --input $(PublishDir) --tc $(ProjectDir)TorchConfig\torch.config.json" />
   </Target>
 
 </Project>
