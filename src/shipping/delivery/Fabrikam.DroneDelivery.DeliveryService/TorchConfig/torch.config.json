@@ -61,7 +61,7 @@
               "Faults": [
                 {
                   "Type": "AddLatencyFault",
-                  "Args": { "Latency": "5s" }
+                  "Args": { "Latency": "0s" }
                 }
               ]
             }
