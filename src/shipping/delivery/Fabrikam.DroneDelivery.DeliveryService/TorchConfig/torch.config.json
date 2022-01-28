@@ -50,7 +50,7 @@
         "Include": [
           {
             "Method": {
-              "Wildcard": "StackExchange.Redis.IDatabaseAsync.StringSetAsync(*)"
+              "Wildcard": "StackExchange.Redis.IDatabaseAsync.StringGetAsync(*)"
             },
             "Rule": {
               "Conditions": [
