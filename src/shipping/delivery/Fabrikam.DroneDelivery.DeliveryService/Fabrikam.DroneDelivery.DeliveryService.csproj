@@ -37,6 +37,9 @@
     <None Update="Measure-TorchOverhead.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Measure-TorchOverhead.sh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <SuppressTorchInstrumentation>True</SuppressTorchInstrumentation>
