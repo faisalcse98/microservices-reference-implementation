@@ -19,7 +19,7 @@
     <PackageReference Include="Microsoft.Azure.EventHubs" Version="1.0.3" />
     <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.0.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Torch" Version="0.13.7-g2cfffe0f86" />
+    <PackageReference Include="Microsoft.Torch" Version="0.13.7-gfda5ecb69c" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.1.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="2.6.1" />
@@ -48,7 +48,7 @@
     <Exec Command="dotnet new tool-manifest --force" />
   </Target>
   <Target Name="TorchPostPublish2" AfterTargets="Publish">
-    <Exec Command="dotnet tool install torch.tool --version 0.13.7-g2cfffe0f86" />
+    <Exec Command="dotnet tool install torch.tool --version 0.13.7-gfda5ecb69c" />
   </Target>
   <Target Name="TorchPostPublish3" AfterTargets="Publish">
     <Exec Command="dotnet torch instrument --input $(PublishDir) --tc $(ProjectDir)TorchConfig\torch.config.json" />
